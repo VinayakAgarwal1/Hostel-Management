@@ -3,355 +3,539 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hostel Complaint Management System - Java & Spring Boot</title>
+  <title>Hostel Services · Thapar Institute of Engineering &amp; Technology</title>
+  <meta name="description" content="Hostel Complaint & Maintenance Management System — Office of Student Affairs, Thapar Institute of Engineering & Technology.">
+  <link rel="icon" type="image/png" href="assets/tiet-mark.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="brand-mark">CMS</span>
-      <div>
-        <h1>Hostel CMS</h1>
-        <p>Spring Boot + MySQL</p>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Icon set -->
+  <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5 21 8l-9 4.5L3 8l9-4.5Z"/><path d="m3 12.5 9 4.5 9-4.5"/><path d="m3 17 9 4.5L21 17"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><path d="M16 5.2a3 3 0 0 1 0 5.6"/><path d="M17.5 15.2c2 .6 3.2 2.2 3.6 4.3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15.2 15.2 4.3 4.3"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 4 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8L12 4Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 19 6v6c0 4.2-2.9 7.3-7 8.5-4.1-1.2-7-4.3-7-8.5V6l7-2.5Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.2a4.2 4.2 0 0 0 5.3 5.3l-9 9a2.8 2.8 0 0 1-4-4l9-9Z"/><path d="m6.5 17.5.01 0"/></symbol>
+  </svg>
+
+  <div class="app">
+    <!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="brand-mark" src="assets/tiet-mark.png" alt="Thapar Institute of Engineering & Technology">
+        <div class="brand-copy">
+          <span class="brand-org">Thapar Institute of Engineering &amp; Technology</span>
+          <span class="brand-app">Hostel Services</span>
+        </div>
       </div>
-    </div>
-    <nav class="nav-tabs" aria-label="Application sections">
-      <button class="nav-tab active" data-view="dashboard">Dashboard</button>
-      <button class="nav-tab" data-view="complaints">Complaints</button>
-      <button class="nav-tab" data-view="departments">Departments</button>
-      <button class="nav-tab" data-view="staff" id="staff-nav-tab" style="display:none;">Staff & Technicians</button>
-      <button class="nav-tab" data-view="new">Register</button>
-    </nav>
-    <div class="sidebar-footer" style="margin-top:auto; padding-top:20px; font-size:12px; color:rgba(255,255,255,0.7); border-top:1px solid rgba(255,255,255,0.1);">
-      <p style="margin:0 0 4px 0;"><strong>UCS Java Project</strong></p>
-      <p style="margin:0;">Thapar University</p>
-    </div>
-  </aside>
 
-  <main class="shell">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Hostel Maintenance & Complaint System — Java 17 / Spring Boot 3</p>
-        <h2 id="page-title">Dashboard</h2>
-      </div>
-      <div class="top-actions">
-        <div id="backend-status" style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; padding:6px 14px; border-radius:20px; background:#dcfce7; color:#15803d; border:1px solid #86efac;">
-          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span>
-          <span id="backend-status-text">Connecting...</span>
-        </div>
-        
-        <div class="user-profile-badge" id="user-profile-badge" style="display:flex; align-items:center; gap:10px; padding:4px 12px; background:#fff; border:1px solid var(--line); border-radius:30px; box-shadow:var(--shadow-soft);">
-          <div style="width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; display:grid; place-items:center; font-weight:800; font-size:12px;" id="user-avatar">A</div>
-          <div style="line-height:1.2;">
-            <div style="font-weight:800; font-size:12px;" id="current-user-name">Aarav Sharma</div>
-            <div style="font-size:11px; color:var(--muted);"><span class="pill status-resolved" id="current-user-role" style="padding:1px 6px; font-size:10px; min-height:18px;">STUDENT</span> <span id="current-user-extra">(A-101)</span></div>
-          </div>
-          <button id="switch-user-btn" class="ghost-action" style="min-height:26px; padding:0 8px; font-size:11px; margin-left:4px; border-radius:14px;" title="Switch Role">Switch Role</button>
+      <nav class="nav" aria-label="Application sections">
+        <p class="nav-label">Workspace</p>
+        <button class="nav-item is-active" data-view="dashboard" aria-current="page">
+          <svg class="i" aria-hidden="true"><use href="#i-grid"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="complaints">
+          <svg class="i" aria-hidden="true"><use href="#i-list"/></svg>
+          <span>Complaint register</span>
+          <span class="nav-badge" id="nav-open-count" hidden></span>
+        </button>
+        <button class="nav-item" data-view="departments">
+          <svg class="i" aria-hidden="true"><use href="#i-layers"/></svg>
+          <span>Maintenance wings</span>
+        </button>
+        <button class="nav-item" data-view="staff" id="staff-nav-tab" style="display:none;">
+          <svg class="i" aria-hidden="true"><use href="#i-users"/></svg>
+          <span>Technician roster</span>
+        </button>
+
+        <p class="nav-label nav-label-spaced">Resident services</p>
+        <button class="nav-item" data-view="new">
+          <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+          <span>Lodge a complaint</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="session-card">
+          <p class="session-label">
+            Signed in as
+            <span class="session-role" id="session-role">Student</span>
+          </p>
+          <button class="user-chip" id="switch-user-btn" type="button" title="Switch role">
+            <span class="avatar" id="user-avatar">A</span>
+            <span class="user-meta">
+              <span class="user-name" id="current-user-name">Aarav Sharma</span>
+              <span class="user-sub"><span id="current-user-role">Student</span> · <span id="current-user-extra">A-101</span></span>
+            </span>
+            <svg class="i i-chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </button>
         </div>
 
-        <label class="search">
-          <span>Search</span>
-          <input id="search-input" type="search" placeholder="ID, user, room, department, issue">
-        </label>
-        <button class="primary-action" data-view-target="new">New complaint</button>
-      </div>
-    </header>
-
-    <section class="view active" id="dashboard-view" aria-labelledby="page-title">
-      <div class="metric-grid" id="metric-grid"></div>
-      <div class="dashboard-grid">
-        <section class="panel">
-          <div class="panel-heading">
-            <h3>Status overview</h3>
-            <span id="status-total"></span>
-          </div>
-          <div class="status-bars" id="status-bars"></div>
-        </section>
-        <section class="panel">
-          <div class="panel-heading">
-            <h3>Priority mix</h3>
-            <span>Live Database Records</span>
-          </div>
-          <div class="priority-stack" id="priority-stack"></div>
-        </section>
-      </div>
-      <section class="panel">
-        <div class="panel-heading">
-          <h3>Recent complaints</h3>
-          <button class="ghost-action" data-view-target="complaints">View all</button>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Resident / Room</th>
-                <th>Department</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody id="recent-rows"></tbody>
-          </table>
-        </div>
-      </section>
-    </section>
-
-    <section class="view" id="complaints-view" aria-labelledby="page-title">
-      <section class="panel toolbar-panel">
-        <div class="filters">
-          <label>
-            Status
-            <select id="status-filter">
-              <option value="All">All</option>
-              <option value="Pending">Pending</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Resolved">Resolved</option>
-            </select>
-          </label>
-          <label>
-            Priority
-            <select id="priority-filter">
-              <option value="All">All</option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
-          </label>
-          <label>
-            Department
-            <select id="department-filter">
-              <option value="All">All</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-heading">
-          <h3>Complaint records</h3>
-          <span id="complaint-count"></span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Resident / Room</th>
-                <th>Category</th>
-                <th>Department</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Registered</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="complaint-rows"></tbody>
-          </table>
-        </div>
-      </section>
-    </section>
-
-    <section class="view" id="departments-view" aria-labelledby="page-title">
-      <section class="panel">
-        <div class="panel-heading">
-          <h3>Hostel Maintenance Wings Performance</h3>
-          <span>Grouped from live MySQL database</span>
-        </div>
-        <div class="department-list" id="department-list"></div>
-      </section>
-    </section>
-
-    <!-- WARDEN ONLY: STAFF & TECHNICIANS MANAGEMENT VIEW -->
-    <section class="view" id="staff-view" aria-labelledby="page-title">
-      <section class="panel">
-        <div class="panel-heading">
+        <div class="office-card">
+          <svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>
           <div>
-            <h3>Maintenance Technicians & Staff Roster</h3>
-            <span style="color:var(--muted); font-size:12px;">Workload metrics, resolution tracking & resident feedback</span>
+            <strong>Office of Student Affairs</strong>
+            <span>Hostel administration · TIET, Patiala</span>
           </div>
-          <button class="primary-action" id="open-add-staff-btn" style="min-height:36px; padding:0 14px; font-size:13px;">+ Add New Staff</button>
+        </div>
+        <p class="copyright">© 2026 TIET · Hostel Services v2.0</p>
+      </div>
+    </aside>
+
+    <!-- ═══════════════════ MAIN COLUMN ═══════════════════ -->
+    <div class="main">
+      <header class="topbar">
+        <div class="crumbs" aria-label="Breadcrumb">
+          <span class="crumb-root">Hostel Services</span>
+          <span class="crumb-sep" aria-hidden="true">/</span>
+          <span class="crumb-current" id="crumb-current">Dashboard</span>
         </div>
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Technician</th>
-                <th>Wing / Department</th>
-                <th>Contact</th>
-                <th>Assigned</th>
-                <th>Resolved</th>
-                <th>Active / Pending</th>
-                <th>Resident Rating</th>
-              </tr>
-            </thead>
-            <tbody id="staff-rows"></tbody>
-          </table>
-        </div>
-      </section>
-    </section>
-
-    <section class="view" id="new-view" aria-labelledby="page-title">
-      <section class="form-layout">
-        <form class="panel form-panel" id="complaint-form">
-          <div class="panel-heading">
-            <h3>Lodge Hostel Complaint</h3>
-            <span>Persisted directly to MySQL</span>
-          </div>
-          <div class="form-grid">
-            <label>
-              Resident (Student)
-              <select id="user-field" required></select>
-            </label>
-            <label>
-              Issue Category
-              <select id="category-field" required></select>
-            </label>
-            <label>
-              Target Department
-              <select id="department-field" required></select>
-            </label>
-            <label>
-              Priority Level
-              <select id="priority-field" required>
-                <option>Low</option>
-                <option selected>Medium</option>
-                <option>High</option>
-              </select>
-            </label>
-          </div>
-          <label>
-            Description of Issue
-            <textarea id="description-field" rows="5" maxlength="500" required placeholder="Describe the hostel issue clearly (e.g., Geyser not heating, Wi-Fi speed low in room B-201, Tap leakage)"></textarea>
+        <div class="topbar-actions">
+          <label class="search" for="search-input">
+            <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="search-input" type="search" placeholder="Search tickets, residents, rooms" autocomplete="off">
           </label>
-          <div class="form-actions">
-            <button class="primary-action" type="submit">Submit Complaint</button>
-            <button class="ghost-action" type="reset">Clear Form</button>
+
+          <div class="connection" id="backend-status" data-state="checking" title="Backend connection status">
+            <span class="connection-dot" aria-hidden="true"></span>
+            <span id="backend-status-text">Connecting…</span>
           </div>
-        </form>
 
-        <aside class="panel note-panel">
-          <h3>Architecture & Workflow</h3>
-          <p>Every submitted complaint triggers an atomic JDBC transaction via <code>ComplaintDAOImpl</code>:</p>
-          <dl>
-            <div><dt>1. Auto ID</dt><dd>Generated via DB primary key</dd></div>
-            <div><dt>2. Initial Status</dt><dd>Defaults to 'Pending'</dd></div>
-            <div><dt>3. Audit Log</dt><dd>Logged into <code>complaint_status_history</code></dd></div>
-            <div><dt>4. Security</dt><dd>Protected against SQL injection via <code>PreparedStatement</code></dd></div>
-          </dl>
-        </aside>
-      </section>
-    </section>
-  </main>
-
-  <!-- COMPLAINT DETAIL DIALOG -->
-  <dialog id="detail-dialog">
-    <div class="dialog-head">
-      <h3 id="detail-title">Complaint details</h3>
-      <button class="icon-button" id="close-dialog" aria-label="Close dialog">x</button>
-    </div>
-    <div id="detail-body"></div>
-  </dialog>
-
-  <!-- ROLE AUTHENTICATION & LOGIN DIALOG -->
-  <dialog id="login-dialog">
-    <div class="dialog-head">
-      <h3>🔐 Role Authentication & Switcher</h3>
-      <button class="icon-button" id="close-login-dialog" aria-label="Close dialog">x</button>
-    </div>
-    <div style="padding:20px; display:grid; gap:16px;">
-      <p style="margin:0; color:var(--muted); font-size:13.5px; line-height:1.5;">
-        Select an actor role below to demo role-specific permissions and workflows:
-      </p>
-
-      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;">
-        <div class="panel" onclick="loginAsRole('student')" style="padding:14px; text-align:center; cursor:pointer; border:2px solid var(--line); border-radius:10px; transition:transform 0.15s, border-color 0.15s;">
-          <div style="font-size:32px; margin-bottom:6px;">👨‍🎓</div>
-          <strong style="display:block; font-size:14px;">Resident Student</strong>
-          <span style="font-size:12px; color:var(--muted); display:block; margin-top:2px;">Aarav Sharma</span>
-          <span class="pill status-pending" style="font-size:10px; min-height:18px; margin-top:8px;">Room A-101</span>
+          <button class="btn btn-primary topbar-cta" data-view-target="new" type="button">
+            <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+            New complaint
+          </button>
         </div>
+      </header>
 
-        <div class="panel" onclick="loginAsRole('warden')" style="padding:14px; text-align:center; cursor:pointer; border:2px solid var(--line); border-radius:10px; transition:transform 0.15s, border-color 0.15s;">
-          <div style="font-size:32px; margin-bottom:6px;">🛡️</div>
-          <strong style="display:block; font-size:14px;">Hostel Warden</strong>
-          <span style="font-size:12px; color:var(--muted); display:block; margin-top:2px;">Admin Authority</span>
-          <span class="pill priority-high" style="font-size:10px; min-height:18px; margin-top:8px;">Full Access</span>
-        </div>
-
-        <div class="panel" onclick="loginAsRole('staff')" style="padding:14px; text-align:center; cursor:pointer; border:2px solid var(--line); border-radius:10px; transition:transform 0.15s, border-color 0.15s;">
-          <div style="font-size:32px; margin-bottom:6px;">🔧</div>
-          <strong style="display:block; font-size:14px;">Technician / Staff</strong>
-          <span style="font-size:12px; color:var(--muted); display:block; margin-top:2px;">Kunal Bedi</span>
-          <span class="pill status-in-progress" style="font-size:10px; min-height:18px; margin-top:8px;">IT & Wi-Fi Wing</span>
-        </div>
+      <div class="offline-banner" id="offline-banner" hidden>
+        <svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>
+        <span><strong>Preview mode.</strong> The Spring Boot API is not reachable, so sample records are shown. Run <code>./mvnw spring-boot:run</code> to work with live data.</span>
       </div>
 
-      <div style="border-top:1px solid var(--line); padding-top:14px; display:grid; gap:8px;">
-        <label style="font-size:12px;">Or log in with registered Email:
-          <div style="display:flex; gap:8px; margin-top:6px;">
-            <input type="email" id="custom-email-input" placeholder="e.g. ananya.iyer@example.com" style="flex:1;">
-            <button class="primary-action" onclick="submitCustomLogin()">Log In</button>
+      <main class="content" id="main-content">
+        <div class="page-head">
+          <div>
+            <p class="page-eyebrow" id="page-eyebrow">Overview</p>
+            <h1 id="page-title">Maintenance overview</h1>
+            <p class="page-subtitle" id="page-subtitle">Every hostel complaint, assignment and resolution in one place.</p>
           </div>
-        </label>
+          <div class="page-meta">
+            <span class="page-meta-label">Data source</span>
+            <span class="page-meta-value" id="page-meta">Connecting to Spring Boot…</span>
+          </div>
+        </div>
+
+        <!-- ═════════════ DASHBOARD ═════════════ -->
+        <section class="view is-active" id="dashboard-view" aria-labelledby="page-title">
+          <div class="stat-strip" id="metric-grid"></div>
+
+          <div class="grid-2">
+            <section class="panel">
+              <header class="panel-head">
+                <div>
+                  <h2>Complaint status</h2>
+                  <p class="panel-sub">Where the currently registered tickets stand.</p>
+                </div>
+                <span class="panel-note" id="status-total"></span>
+              </header>
+              <div class="status-bars" id="status-bars"></div>
+            </section>
+
+            <section class="panel">
+              <header class="panel-head">
+                <div>
+                  <h2>Priority mix</h2>
+                  <p class="panel-sub">Severity split across all raised complaints.</p>
+                </div>
+              </header>
+              <div class="priority-stack" id="priority-stack"></div>
+              <div class="legend" id="priority-legend"></div>
+              <div class="mix-foot" id="mix-foot"></div>
+            </section>
+          </div>
+
+          <section class="panel panel-flush">
+            <header class="panel-head panel-head-inset">
+              <div>
+                <h2>Recent complaints</h2>
+                <p class="panel-sub">Latest tickets registered by residents.</p>
+              </div>
+              <button class="link-action" data-view-target="complaints" type="button">
+                View register
+                <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </button>
+            </header>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="col-id">Ticket</th>
+                    <th>Resident</th>
+                    <th>Wing</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th class="col-date">Registered</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-rows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- ═════════════ COMPLAINT REGISTER ═════════════ -->
+        <section class="view" id="complaints-view" aria-labelledby="page-title">
+          <section class="toolbar">
+            <div class="filters">
+              <label class="field">
+                <span class="field-label">Status</span>
+                <select id="status-filter">
+                  <option value="All">All statuses</option>
+                  <option value="Pending">Pending</option>
+                  <option value="In Progress">In progress</option>
+                  <option value="Resolved">Resolved</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Priority</span>
+                <select id="priority-filter">
+                  <option value="All">All priorities</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Maintenance wing</span>
+                <select id="department-filter">
+                  <option value="All">All wings</option>
+                </select>
+              </label>
+            </div>
+            <span class="count" id="complaint-count"></span>
+          </section>
+
+          <section class="panel panel-flush">
+            <header class="panel-head panel-head-inset">
+              <div>
+                <h2>All tickets</h2>
+                <p class="panel-sub">Every complaint raised across hostel blocks, newest first.</p>
+              </div>
+            </header>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="col-id">Ticket</th>
+                    <th>Resident</th>
+                    <th>Category</th>
+                    <th>Wing</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th class="col-date">Registered</th>
+                    <th class="col-action"></th>
+                  </tr>
+                </thead>
+                <tbody id="complaint-rows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- ═════════════ WINGS ═════════════ -->
+        <section class="view" id="departments-view" aria-labelledby="page-title">
+          <section class="panel panel-flush">
+            <header class="panel-head panel-head-inset">
+              <div>
+                <h2>Wing performance</h2>
+                <p class="panel-sub">Resolution progress and open workload for each maintenance wing.</p>
+              </div>
+              <span class="panel-note" id="wing-count-note"></span>
+            </header>
+            <div class="wing-table">
+              <div class="wing-row wing-row-head" aria-hidden="true">
+                <span>Wing</span>
+                <span>Resolution progress</span>
+                <span class="num">Resolved</span>
+                <span class="num">Open</span>
+                <span class="num">Technicians</span>
+              </div>
+              <div class="department-list" id="department-list"></div>
+            </div>
+          </section>
+        </section>
+
+        <!-- ═════════════ TECHNICIANS (WARDEN) ═════════════ -->
+        <section class="view" id="staff-view" aria-labelledby="page-title">
+          <section class="panel panel-flush">
+            <header class="panel-head panel-head-inset">
+              <div>
+                <h2>Roster &amp; workload</h2>
+                <p class="panel-sub">Assigned tickets, closures and resident ratings by staff member.</p>
+              </div>
+              <button class="btn btn-secondary" id="open-add-staff-btn" type="button">
+                <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>
+                Add technician
+              </button>
+            </header>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="col-id">ID</th>
+                    <th>Technician</th>
+                    <th>Wing</th>
+                    <th>Contact</th>
+                    <th class="num">Assigned</th>
+                    <th class="num">Resolved</th>
+                    <th class="num">Active</th>
+                    <th>Resident rating</th>
+                  </tr>
+                </thead>
+                <tbody id="staff-rows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- ═════════════ LODGE COMPLAINT ═════════════ -->
+        <section class="view" id="new-view" aria-labelledby="page-title">
+          <div class="form-layout">
+            <form class="panel form-panel" id="complaint-form">
+              <header class="panel-head">
+                <div>
+                  <h2>Complaint details</h2>
+                  <p class="panel-sub">Raised as <strong id="form-resident-name">Aarav Sharma</strong> · <span id="form-resident-room">A-101, Block A</span></p>
+                </div>
+              </header>
+
+              <div class="form-grid">
+                <label class="field">
+                  <span class="field-label">Resident</span>
+                  <select id="user-field" required></select>
+                </label>
+                <label class="field">
+                  <span class="field-label">Issue category</span>
+                  <select id="category-field" required></select>
+                </label>
+                <label class="field">
+                  <span class="field-label">Maintenance wing</span>
+                  <select id="department-field" required></select>
+                </label>
+                <label class="field">
+                  <span class="field-label">Priority</span>
+                  <select id="priority-field" required>
+                    <option>Low</option>
+                    <option selected>Medium</option>
+                    <option>High</option>
+                  </select>
+                </label>
+              </div>
+
+              <label class="field">
+                <span class="field-label">Description of the issue</span>
+                <textarea id="description-field" rows="5" maxlength="500" required placeholder="Describe the issue and its location — for example: the geyser in B-201 is not heating since Tuesday morning."></textarea>
+                <span class="field-hint">Be specific about the room, block and how long the problem has persisted.</span>
+              </label>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Submit complaint</button>
+                <button class="btn btn-ghost" type="reset">Clear form</button>
+                <span class="form-note">Recorded against your hostel roll and block.</span>
+              </div>
+            </form>
+
+            <aside class="register-aside">
+              <section class="panel">
+                <header class="panel-head">
+                  <div>
+                    <h2>What happens next</h2>
+                    <p class="panel-sub">The ticket lifecycle from submission to closure.</p>
+                  </div>
+                </header>
+                <ol class="steps">
+                  <li>
+                    <span class="step-num">01</span>
+                    <div><strong>Ticket registered</strong><p>A unique complaint ID is generated and the status is set to <em>Pending</em>.</p></div>
+                  </li>
+                  <li>
+                    <span class="step-num">02</span>
+                    <div><strong>Wing assigned</strong><p>The warden routes the ticket to the responsible maintenance wing and technician.</p></div>
+                  </li>
+                  <li>
+                    <span class="step-num">03</span>
+                    <div><strong>Work in progress</strong><p>Every status change is written to the audit history with a timestamp.</p></div>
+                  </li>
+                  <li>
+                    <span class="step-num">04</span>
+                    <div><strong>Resolved &amp; rated</strong><p>Once closed, you can rate the resolution and leave feedback for the team.</p></div>
+                  </li>
+                </ol>
+              </section>
+
+              <section class="panel aside-note">
+                <div class="aside-note-head">
+                  <svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>
+                  <strong>Data handling</strong>
+                </div>
+                <p>Each submission is written through a single JDBC transaction into <code>complaint</code> and <code>complaint_status_history</code>, using prepared statements throughout.</p>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <footer class="page-foot">
+          <span>© 2026 Thapar Institute of Engineering &amp; Technology · Office of Student Affairs</span>
+          <span>Hostel Complaint &amp; Maintenance System — Java 17 · Spring Boot 3</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- ═════════════ COMPLAINT DETAIL DIALOG ═════════════ -->
+  <dialog id="detail-dialog" class="dialog dialog-lg">
+    <div class="dialog-head">
+      <div>
+        <p class="dialog-eyebrow">Complaint record</p>
+        <h3 id="detail-title">Complaint details</h3>
+      </div>
+      <button class="icon-button" id="close-dialog" type="button" aria-label="Close dialog">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div id="detail-body" class="dialog-body"></div>
+  </dialog>
+
+  <!-- ═════════════ ROLE / SIGN-IN DIALOG ═════════════ -->
+  <dialog id="login-dialog" class="dialog">
+    <div class="dialog-head">
+      <div>
+        <p class="dialog-eyebrow">Session</p>
+        <h3>Switch role</h3>
+      </div>
+      <button class="icon-button" id="close-login-dialog" type="button" aria-label="Close dialog">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="dialog-body">
+      <p class="dialog-lead">Choose an actor to preview the role-specific workflow: residents raise tickets, wardens assign and close them, technicians work the queue.</p>
+
+      <div class="role-list">
+        <button class="role-row" type="button" onclick="loginAsRole('student')">
+          <span class="role-avatar"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span>
+          <span class="role-copy">
+            <strong>Resident student</strong>
+            <span>Aarav Sharma · A-101, Block A — raise and track complaints</span>
+          </span>
+          <span class="role-badge">Student</span>
+        </button>
+        <button class="role-row" type="button" onclick="loginAsRole('warden')">
+          <span class="role-avatar"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <span class="role-copy">
+            <strong>Hostel warden</strong>
+            <span>Administrative authority — assign technicians, resolve tickets</span>
+          </span>
+          <span class="role-badge">Warden</span>
+        </button>
+        <button class="role-row" type="button" onclick="loginAsRole('staff')">
+          <span class="role-avatar"><svg class="i" aria-hidden="true"><use href="#i-wrench"/></svg></span>
+          <span class="role-copy">
+            <strong>Maintenance technician</strong>
+            <span>Kunal Bedi · IT &amp; Wi-Fi — update and close assigned tickets</span>
+          </span>
+          <span class="role-badge">Staff</span>
+        </button>
+      </div>
+
+      <div class="dialog-separator"><span>or sign in with a registered email</span></div>
+
+      <div class="inline-form">
+        <input type="email" id="custom-email-input" placeholder="name@example.com" autocomplete="email" aria-label="Registered email">
+        <button class="btn btn-secondary" type="button" onclick="submitCustomLogin()">Sign in</button>
       </div>
     </div>
   </dialog>
 
-  <!-- FEEDBACK SUBMISSION DIALOG -->
-  <dialog id="feedback-dialog">
+  <!-- ═════════════ FEEDBACK DIALOG ═════════════ -->
+  <dialog id="feedback-dialog" class="dialog">
     <div class="dialog-head">
-      <h3>⭐ Submit Resolution Feedback</h3>
-      <button class="icon-button" id="close-feedback-dialog" aria-label="Close dialog">x</button>
+      <div>
+        <p class="dialog-eyebrow">Resolution review</p>
+        <h3>Rate this resolution</h3>
+      </div>
+      <button class="icon-button" id="close-feedback-dialog" type="button" aria-label="Close dialog">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
     </div>
-    <form id="feedback-form" style="padding:20px; display:grid; gap:14px;">
+    <form id="feedback-form" class="dialog-body">
       <input type="hidden" id="feedback-complaint-id">
-      <div>
-        <label>Rating (1 to 5 Stars):</label>
-        <select id="feedback-rating-select" style="margin-top:6px;">
-          <option value="5">⭐⭐⭐⭐⭐ 5 - Excellent (Resolved Promptly)</option>
-          <option value="4" selected>⭐⭐⭐⭐ 4 - Good (Issue Fixed)</option>
-          <option value="3">⭐⭐⭐ 3 - Average (Satisfactory)</option>
-          <option value="2">⭐⭐ 2 - Poor (Delayed)</option>
-          <option value="1">⭐ 1 - Very Bad (Unresolved)</option>
+      <label class="field">
+        <span class="field-label">Rating</span>
+        <select id="feedback-rating-select">
+          <option value="5">5 — Excellent, resolved promptly</option>
+          <option value="4" selected>4 — Good, issue fixed</option>
+          <option value="3">3 — Average, satisfactory</option>
+          <option value="2">2 — Poor, delayed</option>
+          <option value="1">1 — Very poor, unresolved</option>
         </select>
-      </div>
-      <div>
-        <label>Resident Comments:</label>
-        <textarea id="feedback-comments-text" rows="3" placeholder="Share your experience with the maintenance work..." style="margin-top:6px;"></textarea>
-      </div>
+      </label>
+      <label class="field">
+        <span class="field-label">Comments for the maintenance team</span>
+        <textarea id="feedback-comments-text" rows="4" placeholder="What went well, and what could be improved?"></textarea>
+      </label>
       <div class="form-actions">
-        <button class="primary-action" type="submit">Submit Rating</button>
-      </div>
-    </form>
-  <!-- ADD NEW STAFF DIALOG (WARDEN ONLY) -->
-  <dialog id="add-staff-dialog">
-    <div class="dialog-head">
-      <h3>👷 Add New Technician / Staff Member</h3>
-      <button class="icon-button" id="close-add-staff-dialog" aria-label="Close dialog">x</button>
-    </div>
-    <form id="add-staff-form" style="padding:20px; display:grid; gap:14px;">
-      <div>
-        <label>Full Name:</label>
-        <input type="text" id="new-staff-name" required placeholder="e.g. Rajesh Sharma" style="margin-top:6px;">
-      </div>
-      <div>
-        <label>Maintenance Wing / Department:</label>
-        <select id="new-staff-department" required style="margin-top:6px;"></select>
-      </div>
-      <div>
-        <label>Phone Number:</label>
-        <input type="tel" id="new-staff-phone" required placeholder="e.g. 9876543299" style="margin-top:6px;">
-      </div>
-      <div class="form-actions" style="margin-top:6px;">
-        <button class="primary-action" type="submit">Save Staff Member</button>
-        <button class="ghost-action" type="button" onclick="document.getElementById('add-staff-dialog').close()">Cancel</button>
+        <button class="btn btn-primary" type="submit">Submit rating</button>
+        <button class="btn btn-ghost" type="button" onclick="document.getElementById('feedback-dialog').close()">Cancel</button>
       </div>
     </form>
   </dialog>
+
+  <!-- ═════════════ ADD STAFF DIALOG ═════════════ -->
+  <dialog id="add-staff-dialog" class="dialog">
+    <div class="dialog-head">
+      <div>
+        <p class="dialog-eyebrow">Roster</p>
+        <h3>Add technician</h3>
+      </div>
+      <button class="icon-button" id="close-add-staff-dialog" type="button" aria-label="Close dialog">
+        <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <form id="add-staff-form" class="dialog-body">
+      <label class="field">
+        <span class="field-label">Full name</span>
+        <input type="text" id="new-staff-name" required placeholder="e.g. Rajesh Sharma">
+      </label>
+      <label class="field">
+        <span class="field-label">Maintenance wing</span>
+        <select id="new-staff-department" required></select>
+      </label>
+      <label class="field">
+        <span class="field-label">Phone number</span>
+        <input type="tel" id="new-staff-phone" required placeholder="e.g. 9876543299" inputmode="tel">
+      </label>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Save technician</button>
+        <button class="btn btn-ghost" type="button" onclick="document.getElementById('add-staff-dialog').close()">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast-stack" id="toast-stack" role="status" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
